@@ -1,0 +1,39 @@
+LEVEL 1 - VOICE ANALYSIS ML MODEL
+==================================
+
+STATUS: DEPLOYED AND ACTIVE
+Deployment: External API (Render.com)
+Endpoint: https://neurovoice-level1-ml.onrender.com/predict
+
+MODEL DETAILS:
+- Type: Voice-based Parkinson's detection
+- Framework: Likely scikit-learn or TensorFlow
+- Input Features:
+  * Audio WAV file (multipart upload)
+  * Clinical features:
+    - ac: Age category
+    - nth: Neurological test history
+    - htn: Hypertension status
+    - updrs: UPDRS score
+
+OUTPUT:
+- risk_score: Float (0-1 range)
+- risk_level: String classification
+
+INTEGRATION:
+- Flutter client: lib/core/network/voice_ml_api.dart
+- ViewModel: lib/features/voice_check/voice_check_viewmodel.dart
+- Results stored in: https://neurovoice-db.onrender.com/api/voice-results
+
+DATA FLOW:
+1. User records voice sample in app
+2. App uploads WAV + clinical features via multipart request
+3. External ML API analyzes audio
+4. Returns risk_score and risk_level
+5. Result sent to backend database
+6. Dashboard aggregates historical results
+
+NOTES:
+- No local model file needed (externally hosted)
+- This folder is for documentation only
+- Model already in production use

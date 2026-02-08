@@ -1,0 +1,44 @@
+LEVEL 2 - FACIAL MOVEMENT ANALYSIS ML MODEL
+============================================
+
+STATUS: DEPLOYED AND ACTIVE
+Deployment: External WebView Application (Render.com)
+Endpoint: https://level2-mediapipe-website.onrender.com
+
+MODEL DETAILS:
+- Type: Real-time facial landmark detection
+- Framework: MediaPipe + Custom Classifier
+- Technology: React web app with ML in browser
+- Features:
+  * Face mesh landmark tracking
+  * Blink rate analysis
+  * Facial motion measurement
+  * Asymmetry detection
+
+OUTPUT (via JavaScript Channel):
+- percentage: Risk percentage (0-100)
+- level: Risk classification string
+- blinkRate: Blinks per minute
+- motion: Motion intensity score
+- asymmetry: Boolean (facial asymmetry detected)
+
+INTEGRATION:
+- Flutter client: lib/features/facial_check/facial_check_view.dart
+- Method: WebView with JavaScript channel communication
+- Channel name: 'assessmentResult'
+- Results stored in: https://neurovoice-db.onrender.com/api/face-results
+
+DATA FLOW:
+1. User opens facial test in app
+2. WebView loads React ML application
+3. Browser-based MediaPipe analyzes face in real-time
+4. JavaScript sends results via channel to Flutter
+5. Flutter receives FacialResult object
+6. Result sent to backend database
+7. Dashboard aggregates historical results
+
+NOTES:
+- No local model file needed (browser-based ML)
+- This folder is for documentation only
+- Model runs entirely in WebView
+- Already in production use
